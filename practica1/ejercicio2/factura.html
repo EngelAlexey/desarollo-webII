@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Factura — Soda Universitaria</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <main class="container">
+    <h1>Universidad Técnica Nacional</h1>
+    <h2>Sistema Integrado de Sodas Universitaria</h2>
+
+    <article class="card" id="factura">
+      <header class="fact-header">
+        <div>
+          <div><b>Factura:</b> <span id="numFactura">00000001</span></div>
+          <div><b>Fecha:</b> <span id="fechaHora">—</span></div>
+        </div>
+        <div>
+          <div><b>Cliente:</b> <span id="clienteNombre">—</span></div>
+        </div>
+      </header>
+
+      <section class="fact-body">
+        <div class="linea">
+          <div class="col-desc"><b>Plato Fuerte:</b> <span id="platoDesc"></span></div>
+          <div class="col-precio"><span id="platoPrecio"></span></div>
+        </div>
+
+        <div class="linea">
+          <div class="col-desc"><b>Opcionales:</b>
+            <ul id="opcListado" class="lista"></ul>
+          </div>
+          <div class="col-precio" id="opcPrecios"></div>
+        </div>
+
+        <div class="linea">
+          <div class="col-desc"><b>Bebida:</b> <span id="bebidaDesc"></span></div>
+          <div class="col-precio"><span id="bebidaPrecio"></span></div>
+        </div>
+
+        <hr/>
+
+        <div class="totales">
+          <div>Subtotal:</div><div id="subtotal" class="monto"></div>
+          <div>Impuestos: 15% (IVA)</div><div id="iva" class="monto"></div>
+          <div class="total-label">Total:</div><div id="total" class="monto total"></div>
+        </div>
+      </section>
+
+      <footer class="fact-footer">
+        <p>Esta página se cerrará en <b><span id="seg">10</span>s</b> y retornará a <code>combos.html</code>.</p>
+      </footer>
+    </article>
+  </main>
+
+  <script src="assets/js/menu-datos.js"></script>
+  <script src="assets/js/factura.js"></script>
+</body>
+</html>

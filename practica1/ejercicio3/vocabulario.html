@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Práctica — Vocabulario</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <main class="container">
+    <h1>Práctica de Vocabulario</h1>
+    <h2>Sistema de ejercicios tipo diccionario</h2>
+
+    <article class="card">
+      <!-- Imagen alusiva a la práctica -->
+      <img class="quiz-hero" src="images/vocab/portada.jpg" alt="Práctica de vocabulario" onerror="this.style.display='none'">
+
+      <form id="frmVocab" class="quiz-grid" novalidate></form>
+
+      <div class="actions" style="margin-top:.75rem">
+        <button type="button" class="btn" id="btnAplicar">Aplicar cuestionario</button>
+        <button type="button" class="btn outline" id="btnReiniciar">Reiniciar</button>
+      </div>
+    </article>
+
+    <!-- Resultados -->
+    <section id="resultados" style="display:none; margin-top:1rem">
+      <article class="card">
+        <h3>Resultados por ítem</h3>
+        <div id="listaResultados" class="result-list"></div>
+
+        <hr>
+        <div class="totales">
+          <div>Ítems correctos:</div><div id="aciertos" class="monto"></div>
+          <div>Puntos por acierto:</div><div id="ppor" class="monto"></div>
+          <div class="total-label">Puntaje total:</div><div id="puntajeTotal" class="monto total"></div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script src="assets/js/vocab-datos.js"></script>
+  <script src="assets/js/vocabulario.js"></script>
+</body>
+</html>

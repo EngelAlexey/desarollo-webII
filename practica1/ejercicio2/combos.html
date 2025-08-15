@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Combos — Soda Universitaria</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <main class="container">
+    <h1>Sistema Integrado de Sodas Universitaria</h1>
+    <h2>Orden de servicio</h2>
+
+    <form id="frmPedido" class="card" novalidate>
+      <div class="row">
+        <label class="field">
+          <span>Cliente <b>*</b></span>
+          <input type="text" id="cliente" name="cliente" placeholder="Nombre y apellidos" required />
+        </label>
+      </div>
+
+      <div class="combos-row">
+        <button type="button" class="btn combo" data-combo="1">COMBO 1</button>
+        <button type="button" class="btn combo" data-combo="2">COMBO 2</button>
+        <button type="button" class="btn combo" data-combo="3">COMBO 3</button>
+      </div>
+
+      <div class="grid-3">
+        <!-- Columna 1: Plato fuerte (comboBox) -->
+        <section>
+          <h3>Plato Fuerte <b>*</b> (comboBox)</h3>
+          <select id="plato" name="plato" required>
+            <option value="" disabled selected>Seleccione…</option>
+            <option>Pollo en salsa blanca con hongos</option>
+            <option>Costilla de cerdo agridulce</option>
+            <option>Pescado en salsa de ostiones</option>
+            <option>Beefsteack a la barbacoa</option>
+          </select>
+        </section>
+
+        <!-- Columna 2: Opcionales (checkBox) -->
+        <section>
+          <h3>Opcionales (checkBox)</h3>
+          <label class="check"><input type="checkbox" value="Aros de Cebolla"> Aros de Cebolla</label>
+          <label class="check"><input type="checkbox" value="Vinagreta"> Vinagreta</label>
+          <label class="check"><input type="checkbox" value="Verduras al vapor"> Verduras al vapor</label>
+          <label class="check"><input type="checkbox" value="Tortilla casera"> Tortilla casera</label>
+          <label class="check"><input type="checkbox" value="Puré nuestra tierra"> Puré nuestra tierra</label>
+        </section>
+
+        <!-- Columna 3: Bebida (radioButton) -->
+        <section>
+          <h3>Bebida <b>*</b></h3>
+          <label class="radio"><input type="radio" name="bebida" value="Gaseosa" required> Gaseosa</label>
+          <label class="radio"><input type="radio" name="bebida" value="Natural (500 ml)"> Natural (500 ml)</label>
+          <label class="radio"><input type="radio" name="bebida" value="Café negro"> Café negro</label>
+          <label class="radio"><input type="radio" name="bebida" value="Café con leche"> Café con leche</label>
+          <label class="radio"><input type="radio" name="bebida" value="Agua (250 ml)"> Agua (250 ml)</label>
+        </section>
+      </div>
+
+      <div class="actions">
+        <button type="reset" class="btn outline" id="btnCancelar">CANCELAR</button>
+        <button type="submit" class="btn" id="btnAceptar">ACEPTAR</button>
+      </div>
+
+      <p class="help">Campos marcados con <b>*</b> son obligatorios.</p>
+    </form>
+  </main>
+
+  <script src="assets/js/menu-datos.js"></script>
+  <script src="assets/js/combos.js"></script>
+</body>
+</html>
