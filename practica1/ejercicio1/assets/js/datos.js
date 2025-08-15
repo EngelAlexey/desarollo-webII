@@ -3,29 +3,29 @@ const CATALOGO = [
     id: "1",
     titulo: "Sandman",
     anios: "2022-2025",
-    mini: "/img/Sandman.jpg",
-    full: "/img/Sandman.jpg"
+    mini: "img/Sandman.jpg",
+    full: "img/Sandman.jpg"
   },
   {
     id: "2",
     titulo: "Dexter",
     anios: "2006–2013",
-    mini: "/img/Dexter.jpg",
-    full: "/img/Dexter.jpg"
+    mini: "img/Dexter.jpg",
+    full: "img/Dexter.jpg"
   },
   {
     id: "3",
     titulo: "Invencible",
     anios: "2021-2025",
-    mini: "/img/Invencible.jpg",
-    full: "/img/Invencible.jpg"
+    mini: "img/Invencible.jpg",
+    full: "img/Invencible.jpg"
   },
   {
     id: "4",
     titulo: "The Rookie",
     anios: "2018-2023",
-    mini: "/img/The-Rookie.jpg",
-    full: "/img/The-Rookie.jpg"
+    mini: "img/The-Rookie.jpg",
+    full: "img/The-Rookie.jpg"
   }
 ];
 
