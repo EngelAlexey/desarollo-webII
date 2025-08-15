@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dados — Juego</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <main class="container">
+    <h1>Simulador de Apuestas con Dados</h1>
+    <h2>Registro del jugador y tablero</h2>
+
+    <!-- Panel de registro -->
+    <article class="card" id="panelDatos">
+      <form id="frmJugador" class="grid-3" novalidate>
+        <label class="field">
+          <span>Nombre <b>*</b></span>
+          <input id="nombre" required placeholder="Tu nombre">
+        </label>
+        <label class="field">
+          <span>Monto inicial (banco) <b>*</b></span>
+          <input id="monto" type="number" min="100" step="50" required placeholder="Ej. 10000">
+        </label>
+        <label class="field">
+          <span>Cantidad de dados <b>*</b></span>
+          <select id="cantidadDados" required>
+            <option value="" disabled selected>Seleccione…</option>
+            <option value="2">2 dados</option>
+            <option value="3">3 dados</option>
+          </select>
+        </label>
+
+        <div class="actions" style="grid-column:1/-1">
+          <button class="btn" type="submit">Iniciar juego</button>
+        </div>
+      </form>
+    </article>
+
+    <!-- Mesa de juego -->
+    <article class="card" id="mesa" style="display:none">
+      <header class="fact-header">
+        <div>
+          <div><b>Jugador:</b> <span id="jugadorNombre">—</span></div>
+          <div><b>Monto disponible:</b> <span id="montoDisp">—</span></div>
+          <div><b>Monto apostado:</b> <input id="apuesta" type="number" min="0" step="50" value="0" style="width:140px"></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:.6rem">
+          <img id="emoji" src="images/emoji/pregunta.png" alt="estado" style="width:64px;height:64px;object-fit:contain">
+        </div>
+      </header>
+
+      <section class="juego-grid">
+        <div class="juego-dados" id="areaDados"></div>
+
+        <div>
+          <h3>Tablero de Apuestas</h3>
+          <div id="tablero" class="tablero"></div>
+          <small class="help">Con 2 dados: 2–12 · Con 3 dados: 3–18.</small>
+        </div>
+
+        <div class="juego-controles">
+          <button id="btnJugar" class="btn">J U G A R</button>
+          <div id="ultimoResultado" class="badge">—</div>
+          <div id="racha" class="badge">Racha: 0</div>
+        </div>
+      </section>
+    </article>
+
+    <!-- Pantalla final -->
+    <article class="card" id="final" style="display:none">
+      <h2 id="mensajeFinal">—</h2>
+      <p><b>Monto inicial:</b> <span id="montoInicial"></span> · <b>Monto final:</b> <span id="montoFinal"></span></p>
+      <div class="actions">
+        <a class="btn outline" href="inicio.html">Volver al inicio</a>
+        <button class="btn" id="btnReintentar">Jugar de nuevo</button>
+      </div>
+    </article>
+  </main>
+
+  <script src="assets/js/dados-datos.js"></script>
+  <script src="assets/js/juego.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dados — Verificación de edad</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <main class="container">
+    <h1>Simulador de Apuestas con Dados</h1>
+    <h2>Verificación de edad (mínimo 21 años)</h2>
+
+    <article class="card">
+      <form id="frmEdad" class="row" novalidate>
+        <label class="field" style="max-width:340px">
+          <span>Fecha de nacimiento <b>*</b></span>
+          <input type="date" id="nacimiento" required>
+        </label>
+
+        <div class="actions" style="margin-top:.75rem">
+          <button type="submit" class="btn">Continuar</button>
+        </div>
+        <p class="help">Si no cumples, te regresará aquí en 5 segundos.</p>
+      </form>
+    </article>
+  </main>
+
+  <script src="assets/js/dados-datos.js"></script>
+  <script src="assets/js/inicio.js"></script>
+</body>
+</html>
