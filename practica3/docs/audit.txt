@@ -1,0 +1,2 @@
+PS C:\Users\alexh\OneDrive\Documentos\GitHub\desarollo-webII\practica3> npm audit
+found 0 vulnerabilities
