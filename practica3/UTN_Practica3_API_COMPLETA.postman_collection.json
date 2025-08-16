@@ -1,0 +1,352 @@
+{
+  "info": {
+    "name": "UTN - Práctica 03 API (Completa)",
+    "_postman_id": "c9c6f0c4-0000-4000-a000-000000000002",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Colección completa para probar la API de la Práctica 03 (Auth, Users, Categories, Health)."
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:4000"
+    },
+    {
+      "key": "rootEmail",
+      "value": "root@utn.local"
+    },
+    {
+      "key": "rootPassword",
+      "value": "Root#2025"
+    },
+    {
+      "key": "categoryId",
+      "value": ""
+    },
+    {
+      "key": "userId",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/health"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('status 200', ()=> pm.response.code===200);",
+              "pm.test('ok true', ()=> pm.response.json().ok===true);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Categories",
+      "item": [
+        {
+          "name": "Listar (público)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/categories"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status 200', ()=> pm.response.code===200);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Crear (Root/Admin)",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/categories",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "CategoryID",
+                  "value": "CAT01",
+                  "type": "text"
+                },
+                {
+                  "key": "CategoryName",
+                  "value": "Bebidas",
+                  "type": "text"
+                },
+                {
+                  "key": "Description",
+                  "value": "Líquidos varios",
+                  "type": "text"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": ""
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('201', ()=> pm.response.code===201);",
+                  "var id = pm.response.json().id; pm.collectionVariables.set('categoryId', id);",
+                  "pm.test('id guardado', ()=> !!pm.collectionVariables.get('categoryId'));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Obtener por ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/categories/{{categoryId}}"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('200', ()=> pm.response.code===200);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Imagen por ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/categories/{{categoryId}}/image"
+          }
+        },
+        {
+          "name": "Actualizar (Root/Admin)",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/categories/{{categoryId}}",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "CategoryID",
+                  "value": "CAT01",
+                  "type": "text"
+                },
+                {
+                  "key": "CategoryName",
+                  "value": "Bebidas frías",
+                  "type": "text"
+                },
+                {
+                  "key": "Description",
+                  "value": "Frías y calientes",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('200', ()=> pm.response.code===200);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Borrar (Root)",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/categories/{{categoryId}}"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('200', ()=> pm.response.code===200);"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login (Root)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\":\"{{rootEmail}}\",\"password\":\"{{rootPassword}}\"}"
+            },
+            "url": "{{baseUrl}}/api/auth/login"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('200', ()=> pm.response.code===200);",
+                  "pm.test('cookie set', ()=> pm.response.headers.has('set-cookie'));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Me (requiere login)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/auth/me"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('200', ()=> pm.response.code===200);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Root - Cambiar Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"password\":\"Nuevo#2025\"}"
+            },
+            "url": "{{baseUrl}}/api/auth/root/change-password"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('200', ()=> pm.response.code===200);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/auth/logout"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users (solo ROOT)",
+      "item": [
+        {
+          "name": "Listar",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/users"
+          }
+        },
+        {
+          "name": "Crear Admin",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/users",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\":\"admin@utn.local\",\"name\":\"Admin Uno\",\"role\":\"Admin\",\"password\":\"Admin#2025\"}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('201', ()=> pm.response.code===201);",
+                  "pm.collectionVariables.set('userId', pm.response.json().id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Actualizar Admin (name)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/users/{{userId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\":\"Admin Renombrado\"}"
+            }
+          }
+        },
+        {
+          "name": "Borrar Admin",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/users/{{userId}}"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('200', ()=> pm.response.code===200);"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

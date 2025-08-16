@@ -12,6 +12,7 @@ import { connectDB } from "./db.js";
 import { ensureRoot } from "./seedRoot.js";
 import authRoutes from "./routes/auth.routes.js";
 import categoryRoutes from "./routes/categories.routes.js";
+import usersRoutes from "./routes/users.routes.js";   // ⬅️ nuevo
 
 const app = express();
 const server = createServer(app);
@@ -26,13 +27,13 @@ const {
   ROOT_NAME = "Root"
 } = process.env;
 
-// Middleware base
+// --- Middlewares base
 app.set("trust proxy", 1);
 app.use(morgan("dev"));
 app.use(express.json({ limit: "512kb" }));
 app.use(express.urlencoded({ extended: true, limit: "512kb" }));
 
-// CORS
+// CORS + headers
 app.use(cors({ origin: CORS_ORIGIN, credentials: true }));
 app.use((_, res, next) => { res.setHeader("X-Powered-By", "UTN-API"); next(); });
 
@@ -48,14 +49,14 @@ app.use(helmet({
   }
 }));
 
-// Sesión basada en cookies
+// Sesión
 app.use(cookieSession({
   name: "sid",
   secret: SESSION_SECRET,
   httpOnly: true,
   sameSite: "lax",
-  secure: false, // en producción: true (https)
-  maxAge: 1000 * 60 * 60 // 1 hora
+  secure: false,
+  maxAge: 1000 * 60 * 60
 }));
 
 // Timeouts y rate limit
@@ -65,9 +66,32 @@ app.use(timeout("10s"));
 app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 100, standardHeaders: true, legacyHeaders: false }));
 app.use(compression());
 
-// Rutas
+/** Home (opcional, para no ver 404 en /) */
+app.get("/", (_req, res) => {
+  res.type("html").send(`
+    <html><head><meta charset="utf-8"><title>API UTN</title></head>
+    <body style="font-family:system-ui;background:#0b1220;color:#e5e7eb">
+      <h1>API UTN — Práctica 03</h1>
+      <ul>
+        <li>GET <code>/api/health</code></li>
+        <li>GET <code>/api/categories</code></li>
+        <li>POST <code>/api/auth/login</code></li>
+        <li>GET <code>/api/users</code> (Root)</li>
+      </ul>
+    </body></html>
+  `);
+});
+
+/** Health check */
+app.get("/api/health", (_req, res) => {
+  const up = process.uptime();
+  res.json({ ok: true, uptime: up, time: new Date().toISOString() });
+});
+
+// Rutas API
 app.use("/api/auth", authRoutes);
 app.use("/api/categories", categoryRoutes);
+app.use("/api/users", usersRoutes);      // ⬅️ nuevo
 
 // 404
 app.use((req, res) => res.status(404).json({ error: "Ruta no encontrada" }));
