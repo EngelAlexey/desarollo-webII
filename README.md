@@ -36,7 +36,7 @@ Requisitos
 Configuración
 
 1. Clonar el repositorio y entrar a la carpeta `practica3`.
-2. Instalar dependencias: npm i
+2. Instalar dependencias: npm install
 3. Ejecutar: npm run dev
 
 Endpoints principales
